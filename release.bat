@@ -69,7 +69,7 @@ if /i "%CONFIRM%" == "O" (
     
     echo Attente de la fin du build GitHub Actions...
     echo Une fois le build terminé, vous pourrez trouver la release à l'adresse:
-    echo https://github.com/VOTRE_NOM_UTILISATEUR/RavenBS-Plus/releases
+    echo https://github.com/OlziYT/RavenBS-Plus-Plus/releases
     
     echo Version %NEW_VERSION% créée et poussée avec succès!
 ) else (

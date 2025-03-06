@@ -45,7 +45,7 @@ powershell -Command "(Get-Content CONTRIBUTING.md) -replace 'La version actuelle
 
 REM Compiler le projet
 echo Compilation du projet...
-call gradlew.bat build --no-daemon
+call gradle build --no-daemon
 if %ERRORLEVEL% neq 0 (
     echo Erreur lors de la compilation du projet.
     exit /b 1

@@ -36,6 +36,15 @@ jobs:
     - name: Build with Gradle
       run: gradle build --no-daemon
       
+    - name: Calculate JAR Hash
+      id: hash
+      shell: pwsh
+      run: |
+        $jar = Get-ChildItem -Path "build/libs" -Filter "*.jar" | Select-Object -First 1
+        $hash = Get-FileHash -Path $jar.FullName -Algorithm SHA256
+        echo "HASH=$($hash.Hash)" >> $env:GITHUB_ENV
+        echo "JAR_NAME=$($jar.Name)" >> $env:GITHUB_ENV
+      
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -64,6 +73,15 @@ jobs:
     - name: Build with Gradle
       run: gradle build --no-daemon
       
+    - name: Calculate JAR Hash
+      id: hash
+      shell: pwsh
+      run: |
+        $jar = Get-ChildItem -Path "build/libs" -Filter "*.jar" | Select-Object -First 1
+        $hash = Get-FileHash -Path $jar.FullName -Algorithm SHA256
+        echo "HASH=$($hash.Hash)" >> $env:GITHUB_ENV
+        echo "JAR_NAME=$($jar.Name)" >> $env:GITHUB_ENV
+      
     - name: Get version from tag
       id: get_version
       run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
@@ -77,5 +95,24 @@ jobs:
         name: Release ${{ env.VERSION }}
         draft: false
         prerelease: false
-        files: ./build/libs/raven-bS-*.jar
+        files: ./build/libs/*.jar
         generate_release_notes: true
+        body: |
+          ## RavenBS-Plus v${{ env.VERSION }}
+          
+          ### Hash de sécurité
+          **Fichier**: ${{ env.JAR_NAME }}
+          **SHA256**: ${{ env.HASH }}
+          
+          ### Vérification d'intégrité
+          Pour vérifier l'intégrité du fichier sur Windows :
+          ```powershell
+          Get-FileHash -Path "${{ env.JAR_NAME }}" -Algorithm SHA256
+          ```
+          
+          Pour vérifier l'intégrité sur Linux/Mac :
+          ```bash
+          shasum -a 256 "${{ env.JAR_NAME }}"
+          ```
+          
+          Le hash doit correspondre à celui indiqué ci-dessus.

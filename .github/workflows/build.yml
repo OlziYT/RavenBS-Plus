@@ -98,7 +98,7 @@ jobs:
         files: ./build/libs/*.jar
         generate_release_notes: true
         body: |
-          ## RavenBS-Plus v${{ env.VERSION }}
+          ## RavenBS-Plus-Plus v${{ env.VERSION }}
           
           ### Hash de sécurité
           **Fichier**: ${{ env.JAR_NAME }}

@@ -1,0 +1,11 @@
+[
+    {
+      "modid": "${modid}",
+      "name": "Raven bS+",
+      "description": "Shows your keystrokes ingame. | Updated and modified by spiderfrog | V5 by Yario & Extazz | Ported by OFP. | Plus version by RavenBS-Plus Contributors",
+      "version": "${version}",
+      "url": "https://www.youtube.com/ofpmedia",
+      "authorList": ["OFP", "Fyu", "spiderfrog", "Yario & Extazz", "RavenBS-Plus Contributors"],
+      "credits": "OFP, Fyu, spiderfrog, Yario & Extazz, RavenBS-Plus Contributors"
+    }
+]

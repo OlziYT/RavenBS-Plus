@@ -244,9 +244,7 @@ public class KillAura extends Module {
 
     @SubscribeEvent
     public void onPreUpdate(PreUpdateEvent e) {
-        if (autoBlockMode.getInput() == 4) {
-            aps.setValue(5);
-        } else if (autoBlockMode.getInput() == 5) {
+        if (autoBlockMode.getInput() == 5) {
             aps.setValue(16.5);
         }
         wasUsing = mc.gameSettings.keyBindUseItem.isKeyDown();

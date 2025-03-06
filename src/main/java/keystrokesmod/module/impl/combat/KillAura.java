@@ -41,7 +41,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static net.minecraft.util.EnumFacing.DOWN;
 
-
+/**
+ * @author 0b00101010
+ */
 public class KillAura extends Module {
     private SliderSetting aps;
     public SliderSetting autoBlockMode;
@@ -946,8 +948,9 @@ public class KillAura extends Module {
                     }
                 }
                 break;
-                case 4: // hypixel 1.8.x
-                if (interactTicks >= 3) {
+            case 4: // hypixel 1.8.x
+                int maxTicks = Math.max(1, (int)(20.0 / aps.getInput())); // Convertit APS en ticks
+                if (interactTicks >= maxTicks) {
                     interactTicks = 0;
                 }
                 interactTicks++;

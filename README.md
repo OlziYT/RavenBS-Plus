@@ -1,4 +1,4 @@
-# Raven bS+
+# Raven bS++
 
 Raven bS, but with more features and bypasses
 
@@ -9,43 +9,43 @@ Raven bS, but with more features and bypasses
 - [Raven bS+ Discord](https://discord.gg/uh76TBcHBJ)
 
 ## Description
-Raven bS+ est un mod Minecraft 1.8.9 qui ajoute des fonctionnalités supplémentaires et des améliorations au mod Raven bS original. Version actuelle: 1.5.0
+Raven bS+ is a Minecraft 1.8.9 mod that adds additional features and improvements to the original Raven bS mod. Current version: 1.5.0
 
 ## Installation
-1. Téléchargez la dernière version depuis la section [Releases](https://github.com/VOTRE_NOM_UTILISATEUR/RavenBS-Plus/releases)
-2. Placez le fichier JAR dans votre dossier `.minecraft/mods`
-3. Lancez Minecraft avec Forge 1.8.9
+1. Download the latest version from the [Releases](https://github.com/YOUR_USERNAME/RavenBS-Plus-Plus/releases) section
+2. Place the JAR file in your `.minecraft/mods` folder
+3. Launch Minecraft with Forge 1.8.9
 
-## Développement
+## Development
 
-### Prérequis
-- JDK 21 (pour la compilation)
+### Prerequisites
+- JDK 21 (for compilation)
 - Gradle
 
-### Compiler le projet
+### Building the project
 ```bash
-# Cloner le dépôt
-git clone https://github.com/VOTRE_NOM_UTILISATEUR/RavenBS-Plus.git
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/RavenBS-Plus.git
 cd RavenBS-Plus
 
-# Compiler le projet
+# Build the project
 ./gradlew build --no-daemon
 ```
 
-Les fichiers JAR compilés seront disponibles dans le dossier `build/libs/`.
+The compiled JAR files will be available in the `build/libs/` folder.
 
-### Configuration de l'IDE
-Le projet utilise Gradle pour gérer les dépendances et la configuration. Vous pouvez importer le projet dans IntelliJ IDEA ou Eclipse.
+### IDE Setup
+The project uses Gradle to manage dependencies and configuration. You can import the project into IntelliJ IDEA or Eclipse.
 
-## Contribution
-1. Forkez le projet
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/amazing-feature`)
-3. Committez vos changements (`git commit -m 'Add some amazing feature'`)
-4. Poussez vers la branche (`git push origin feature/amazing-feature`)
-5. Ouvrez une Pull Request
+## Contributing
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Versionnement
-Nous utilisons le [versionnement sémantique](https://semver.org/). Pour les versions disponibles, voir les [tags sur ce dépôt](https://github.com/VOTRE_NOM_UTILISATEUR/RavenBS-Plus/tags).
+## Versioning
+We use [semantic versioning](https://semver.org/). For available versions, see the [tags on this repository](https://github.com/YOUR_USERNAME/RavenBS-Plus/tags).
 
-## Licence
-Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.

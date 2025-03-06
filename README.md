@@ -9,24 +9,24 @@ Raven bS, but with more features and bypasses
 - [Raven bS+ Discord](https://discord.gg/uh76TBcHBJ)
 
 ## Description
-Raven bS+ is a Minecraft 1.8.9 mod that adds additional features and improvements to the original Raven bS mod. Current version: 1.5.1
+Raven bS++ is a Minecraft 1.8.9 mod that adds additional features and improvements to the original Raven bS mod. Current version: 1.5.1
 
 ## Installation
-1. Download the latest version from the [Releases](https://github.com/YOUR_USERNAME/RavenBS-Plus-Plus/releases) section
+1. Download the latest version from the [Releases](https://github.com/OlziYT/RavenBS-Plus-Plus/releases) section
 2. Place the JAR file in your `.minecraft/mods` folder
 3. Launch Minecraft with Forge 1.8.9
 
 ## Development
 
 ### Prerequisites
-- JDK 21 (for compilation)
-- Gradle
+- [JDK 21 LTS](https://adoptium.net/temurin/releases/?version=21) (for compilation)
+- [Gradle](https://gradle.org/install/) (latest version)
 
 ### Building the project
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/RavenBS-Plus.git
-cd RavenBS-Plus
+git clone https://github.com/OlziYT/RavenBS-Plus-Plus.git   
+cd RavenBS-Plus-Plus
 
 # Build the project
 ./gradlew build --no-daemon
@@ -45,7 +45,7 @@ The project uses Gradle to manage dependencies and configuration. You can import
 5. Open a Pull Request
 
 ## Versioning
-We use [semantic versioning](https://semver.org/). For available versions, see the [tags on this repository](https://github.com/YOUR_USERNAME/RavenBS-Plus/tags).
+We use [semantic versioning](https://semver.org/). For available versions, see the [tags on this repository](https://github.com/OlziYT/RavenBS-Plus-Plustags).
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.

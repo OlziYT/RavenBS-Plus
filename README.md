@@ -3,12 +3,11 @@
 ![image](https://github.com/user-attachments/assets/d2568078-6e45-46d7-8480-9f5d5eb6bc23)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Version](https://img.shields.io/github/v/release/OlziYT/RavenBS-Plus-Plus)
-![Issues](https://img.shields.io/github/issues/OlziYT/RavenBS-Plus-Plus)
-![Stars](https://img.shields.io/github/stars/OlziYT/RavenBS-Plus-Plus)
-[![Discord](https://img.shields.io/discord/1205592567274242048?label=chat&logo=discord)](https://discord.gg/ZWttByQD5N)
+[![Discord](https://img.shields.io/discord/1205592567274242048?color=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/WBFFSd9trg)
+![Stars](https://img.shields.io/github/stars/OlziYT/RavenBS-Plus-Plus?style=flat&logo=github)
 
 ## Discord
-- [Raven bS Discord](https://discord.gg/ZWttByQD5N)
+- [RavenBS++ Discord](https://discord.gg/WBFFSd9trg)
 
 ## Description
 Raven bS++ is a Minecraft 1.8.9 mod that adds additional features and improvements to the original Raven bS mod. Current version: 1.5.1

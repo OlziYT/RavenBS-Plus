@@ -10,7 +10,7 @@
 - [RavenBS++ Discord](https://discord.gg/WBFFSd9trg)
 
 ## Description
-Raven bS++ is a Minecraft 1.8.9 mod that adds additional features and improvements to the original Raven bS mod. Current version: 1.5.1
+Raven bS++ is a Minecraft 1.8.9 mod that adds additional features and improvements to the original Raven bS mod.
 
 ## Installation
 1. Download the latest version from the [Releases](https://github.com/OlziYT/RavenBS-Plus-Plus/releases) section

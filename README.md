@@ -1,10 +1,10 @@
 # RavenBS-Plus-Plus
 
 ![image](https://github.com/user-attachments/assets/d2568078-6e45-46d7-8480-9f5d5eb6bc23)
-[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/OlziYT/RavenBS-Plus-Plus/blob/master/LICENSE)
-[![Version](https://img.shields.io/github/v/release/OlziYT/RavenBS-Plus-Plus)](https://github.com/OlziYT/RavenBS-Plus-Plus/releases/latest)
+[![License](https://img.shields.io/badge/license-MIT-orange)](https://github.com/OlziYT/RavenBS-Plus-Plus/blob/master/LICENSE)
+[![Version](https://img.shields.io/github/v/release/OlziYT/RavenBS-Plus-Plus?color=44ac40)](https://github.com/OlziYT/RavenBS-Plus-Plus/releases/latest)
 [![Discord](https://img.shields.io/discord/1049294424141725776?color=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/WBFFSd9trg)
-[![Stars](https://img.shields.io/github/stars/OlziYT/RavenBS-Plus-Plus?style=flat&logo=github)](https://github.com/OlziYT/RavenBS-Plus-Plus/stargazers)
+[![Stars](https://img.shields.io/github/stars/OlziYT/RavenBS-Plus-Plus?style=flat&logo=github&color=ffd840)](https://github.com/OlziYT/RavenBS-Plus-Plus/stargazers)
 
 ## Discord
 - [RavenBS++ Discord](https://discord.gg/WBFFSd9trg)

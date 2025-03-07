@@ -3,7 +3,7 @@
 ![image](https://github.com/user-attachments/assets/d2568078-6e45-46d7-8480-9f5d5eb6bc23)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Version](https://img.shields.io/github/v/release/OlziYT/RavenBS-Plus-Plus)
-[![Discord](https://img.shields.io/discord/1205592567274242048?color=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/WBFFSd9trg)
+[![Discord](https://img.shields.io/discord/1049294424141725776?color=7289da&label=discord&logo=discord&logoColor=white)](https://discord.gg/WBFFSd9trg)
 ![Stars](https://img.shields.io/github/stars/OlziYT/RavenBS-Plus-Plus?style=flat&logo=github)
 
 ## Discord

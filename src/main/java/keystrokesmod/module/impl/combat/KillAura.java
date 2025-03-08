@@ -70,6 +70,7 @@ public class KillAura extends Module {
     private ButtonSetting weaponOnly;
     private SliderSetting infoMode;
     private ButtonSetting showTargetNumber;
+    private ButtonSetting showPacketMessages;
     private String[] infoModes = new String[] { "Autoblock", "Rotation", "APS", "Targets" };
 
     private String[] autoBlockModes = new String[] { "Manual", "Vanilla", "Fake", "Partial", "Hypixel 1.8.x", "Hypixel 1.12.x" };
@@ -143,6 +144,7 @@ public class KillAura extends Module {
         this.registerSetting(requireMouseDown = new ButtonSetting("Require mouse down", false));
         this.registerSetting(silentSwing = new ButtonSetting("Silent swing while blocking", false));
         this.registerSetting(weaponOnly = new ButtonSetting("Weapon only", false));
+        this.registerSetting(showPacketMessages = new ButtonSetting("Show packet messages", false));
         this.registerSetting(infoMode = new SliderSetting("Info Mode", 0, infoModes));
         this.registerSetting(showTargetNumber = new ButtonSetting("Show target number", true));
     }
@@ -416,31 +418,41 @@ public class KillAura extends Module {
         if (!Utils.nullCheck()) {
             return;
         }
-        Packet packet = e.getPacket();
+        Packet<?> packet = e.getPacket();
         if (packet instanceof C08PacketPlayerBlockPlacement) {
             C08PacketPlayerBlockPlacement p = (C08PacketPlayerBlockPlacement) e.getPacket();
             if (delayTicks >= 0) {
-                if (p.getStack() != null && p.getStack().getItem() instanceof ItemSword && p.getPlacedBlockDirection() != 255) {
+                if (p.getStack() != null && p.getStack().getItem() != null && p.getStack().getItem() instanceof ItemSword && !blinkAutoBlock()) {
+                    if (p.getPosition().getY() == -1 && p.getPlacedBlockDirection() == 255) {
+                        if (!blinking.get()) {
+                            blockingServer = true;
+                        }
+                        if (blinking.get()) {
+                            e.setCanceled(true);
+                            blinkedPackets.add(packet);
+                        }
+                    } else if (blinking.get()) {
+                        e.setCanceled(true);
+                        blinkedPackets.add(packet);
+                    }
+                } else if (blinking.get()) {
                     e.setCanceled(true);
+                    blinkedPackets.add(packet);
+                } else if (p.getStack() != null && p.getStack().getItem() != null && p.getStack().getItem() instanceof ItemSword) {
+                    if (showPacketMessages.isToggled()) {
+                        Utils.sendModuleMessage(this, "&cSkipping invalid packet: " + packet.getClass().getSimpleName());
+                    }
                 }
             }
         }
-        if (blinking.get() && !e.isCanceled()) { // blink
-            if (packet instanceof C00PacketLoginStart || packet instanceof C00Handshake) {
-                return;
+        if (packet instanceof C0APacketAnimation || packet instanceof C02PacketUseEntity || packet instanceof C08PacketPlayerBlockPlacement || packet instanceof C07PacketPlayerDigging) {
+            if (showPacketMessages.isToggled()) {
+                String packetName = packet.getClass().getSimpleName().replace("C0", "").replace("Packet", "");
+                Utils.sendMessage("&7[&cKillAura&7] &fSent " + packetName);
             }
-            
-            // Vérifier si le packet peut être ajouté en toute sécurité
-            try {
-                // Vérifier si le packet est valide pour la sérialisation
-                if (packet.getClass().getMethod("getID").invoke(packet) != null) {
-                    blinkedPackets.add(packet);
-                    e.setCanceled(true);
-                }
-            } catch (Exception ex) {
-                // Si le packet n'est pas valide, ne pas l'ajouter à la file d'attente
-                // et laisser Minecraft l'envoyer normalement
-                Utils.sendModuleMessage(this, "&cSkipping invalid packet: " + packet.getClass().getSimpleName());
+            if (blinking.get()) {
+                e.setCanceled(true);
+                blinkedPackets.add(packet);
             }
         }
     }
@@ -1285,7 +1297,9 @@ public class KillAura extends Module {
                             PacketUtils.sendPacketNoEvent(packet);
                         } catch (Exception ex) {
                             // Ignorer les packets qui causent des erreurs
-                            Utils.sendModuleMessage(this, "&cError with packet: " + packet.getClass().getSimpleName());
+                            if (showPacketMessages.isToggled()) {
+                                Utils.sendModuleMessage(this, "&cError with packet: " + packet.getClass().getSimpleName());
+                            }
                         }
                     }
                 }
@@ -1293,7 +1307,9 @@ public class KillAura extends Module {
         }
         catch (Exception e) {
             e.printStackTrace();
-            Utils.sendModuleMessage(this, "&cThere was an error releasing blinked packets");
+            if (showPacketMessages.isToggled()) {
+                Utils.sendModuleMessage(this, "&cThere was an error releasing blinked packets");
+            }
         }
         blinkedPackets.clear();
     }

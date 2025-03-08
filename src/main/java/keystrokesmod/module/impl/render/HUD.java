@@ -50,6 +50,9 @@ public class HUD extends Module {
     private boolean canShowInfo;
     private String[] outlineModes = new String[] { "None", "Full", "Side" };
     private static int backGroundColor = new Color(0, 0, 0, 110).getRGB();
+    private static float lastScaleFactor = 0;
+    private static int lastScreenWidth = 0;
+    private static int lastScreenHeight = 0;
 
     public HUD() {
         super("HUD", Module.category.render);
@@ -87,6 +90,32 @@ public class HUD extends Module {
         if (ev.phase != TickEvent.Phase.END || !Utils.nullCheck()) {
             return;
         }
+        
+        // Get scaled resolution
+        ScaledResolution sr = new ScaledResolution(mc);
+        int screenWidth = sr.getScaledWidth();
+        int screenHeight = sr.getScaledHeight();
+        float scaleFactor = sr.getScaleFactor();
+        
+        // Check if screen size or scale changed
+        if (lastScaleFactor != scaleFactor || lastScreenWidth != screenWidth || lastScreenHeight != screenHeight) {
+            // Adjust position proportionally to maintain relative position
+            if (lastScaleFactor != 0) {
+                float scaleRatio = scaleFactor / lastScaleFactor;
+                posX = Math.round(posX * (screenWidth / (float)lastScreenWidth));
+                posY = Math.round(posY * (screenHeight / (float)lastScreenHeight));
+            }
+            
+            // Update last known values
+            lastScaleFactor = scaleFactor;
+            lastScreenWidth = screenWidth;
+            lastScreenHeight = screenHeight;
+        }
+        
+        // Ensure HUD stays within screen bounds
+        posX = Math.max(2, Math.min(screenWidth - 2, posX));
+        posY = Math.max(2, Math.min(screenHeight - 2, posY));
+        
         if (isAlphabeticalSort != alphabeticalSort.isToggled()) {
             isAlphabeticalSort = alphabeticalSort.isToggled();
             ModuleManager.sort();
@@ -309,12 +338,15 @@ public class HUD extends Module {
         int lmX = 0;
         int lmY = 0;
         int clickMinX = 0;
+        float lastDragScaleFactor = 0;
 
         public void initGui() {
             super.initGui();
             this.buttonList.add(this.resetPosition = new GuiButtonExt(1, this.width - 90, this.height - 25, 85, 20, "Reset position"));
             this.aX = HUD.posX;
             this.aY = HUD.posY;
+            ScaledResolution sr = new ScaledResolution(mc);
+            this.lastDragScaleFactor = sr.getScaleFactor();
         }
 
         public void drawScreen(int mX, int mY, float pt) {
@@ -475,18 +507,35 @@ public class HUD extends Module {
 
         protected void mouseClickMove(int mX, int mY, int b, long t) {
             super.mouseClickMove(mX, mY, b, t);
+            ScaledResolution sr = new ScaledResolution(mc);
+            int screenWidth = sr.getScaledWidth();
+            int screenHeight = sr.getScaledHeight();
+            float currentScaleFactor = sr.getScaleFactor();
+            
             if (b == 0) {
                 if (this.d) {
-                    this.aX = this.laX + (mX - this.lmX);
-                    this.aY = this.laY + (mY - this.lmY);
+                    // Calculate new position with scale factor compensation
+                    float scaleRatio = currentScaleFactor / this.lastDragScaleFactor;
+                    int deltaX = (int)((mX - this.lmX) * scaleRatio);
+                    int deltaY = (int)((mY - this.lmY) * scaleRatio);
+                    
+                    int newX = this.laX + deltaX;
+                    int newY = this.laY + deltaY;
+                    
+                    // Ensure HUD stays within screen bounds with padding
+                    newX = Math.max(2, Math.min(screenWidth - 2, newX));
+                    newY = Math.max(2, Math.min(screenHeight - 2, newY));
+                    
+                    this.aX = newX;
+                    this.aY = newY;
                 } else if (mX > this.clickMinX && mX < this.maX && mY > this.miY && mY < this.maY) {
                     this.d = true;
                     this.lmX = mX;
                     this.lmY = mY;
                     this.laX = this.aX;
                     this.laY = this.aY;
+                    this.lastDragScaleFactor = currentScaleFactor;
                 }
-
             }
         }
 

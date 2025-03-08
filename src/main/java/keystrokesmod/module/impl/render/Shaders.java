@@ -11,24 +11,45 @@ public class Shaders extends Module {
     private SliderSetting shader;
     private String[] shaderNames;
     private ResourceLocation[] shaderLocations;
+    private boolean initialized = false;
 
     public Shaders() {
         super("Shaders", category.render);
-        shaderLocations = ((IAccessorEntityRenderer) mc.entityRenderer).getShaderResourceLocations();
-        if (shaderLocations == null) {
-            return;
+    }
+
+    private void initializeShaders() {
+        if (!initialized && mc != null && mc.entityRenderer != null) {
+            try {
+                shaderLocations = ((IAccessorEntityRenderer) mc.entityRenderer).getShaderResourceLocations();
+                if (shaderLocations != null) {
+                    shaderNames = new String[shaderLocations.length];
+                    for (int i = 0; i < shaderLocations.length; ++i) {
+                        shaderNames[i] = ((String[]) shaderLocations[i].getResourcePath().replaceFirst("shaders/post/", "").split("\\.json"))[0].toUpperCase();
+                    }
+                    this.registerSetting(shader = new SliderSetting("Shader", 0, shaderNames));
+                    initialized = true;
+                }
+            } catch (Exception e) {
+                Utils.sendMessage("&cError initializing shaders.");
+                this.disable();
+            }
         }
-        shaderNames = new String[shaderLocations.length];
-        for (int i = 0; i < shaderLocations.length; ++i) {
-            shaderNames[i] = ((String[]) shaderLocations[i].getResourcePath().replaceFirst("shaders/post/", "").split("\\.json"))[0].toUpperCase();
-        }
-        this.registerSetting(shader = new SliderSetting("Shader", 0, shaderNames));
     }
 
     public void onUpdate() {
-        if (!Utils.nullCheck() || mc.entityRenderer == null || shaderLocations == null) {
+        if (!Utils.nullCheck() || mc.entityRenderer == null) {
             return;
         }
+
+        if (!initialized) {
+            initializeShaders();
+            return;
+        }
+
+        if (shaderLocations == null) {
+            return;
+        }
+
         try {
             if (((IAccessorEntityRenderer) mc.entityRenderer).getShaderIndex() != (int) shader.getInput()) {
                 ((IAccessorEntityRenderer) mc.entityRenderer).setShaderIndex((int) shader.getInput());
@@ -46,13 +67,20 @@ public class Shaders extends Module {
     }
 
     public void onDisable() {
-        mc.entityRenderer.stopUseShader();
+        if (mc.entityRenderer != null) {
+            mc.entityRenderer.stopUseShader();
+        }
     }
 
     public void onEnable() {
         if (!OpenGlHelper.shadersSupported) {
             Utils.sendMessage("&cShaders not supported.");
             this.disable();
+            return;
+        }
+
+        if (!initialized) {
+            initializeShaders();
         }
     }
 }

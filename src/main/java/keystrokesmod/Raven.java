@@ -66,10 +66,15 @@ public class Raven {
         MinecraftForge.EVENT_BUS.register(packetsHandler = new PacketsHandler());
         MinecraftForge.EVENT_BUS.register(new ModHelper(this.mc));
         Reflection.getFields();
+        
+        // Initialize GUI first
+        clickGui = new ClickGui();
+        
+        // Then register modules
         moduleManager.register();
+        
         scriptManager = new ScriptManager();
         keySrokeRenderer = new KeySrokeRenderer();
-        clickGui = new ClickGui();
         profileManager = new ProfileManager();
         ScriptDefaults.reloadModules();
         scriptManager.loadScripts();

@@ -87,13 +87,27 @@ dependencies {
     shadowImpl("org.java-websocket:Java-WebSocket:1.6.0")
 }
 
+// Process Java source files to replace @VERSION@
+tasks.register<Copy>("processJavaSources") {
+    from(sourceSets.main.get().java.srcDirs)
+    into(layout.buildDirectory.dir("generated/java"))
+    filter { line ->
+        line.replace("@VERSION@", project.version.toString())
+    }
+}
+
+tasks.compileJava {
+    dependsOn("processJavaSources")
+    source = fileTree(layout.buildDirectory.dir("generated/java"))
+}
+
 tasks.processResources {
     inputs.property("version", project.version)
     inputs.property("mcversion", mcVersion)
     inputs.property("modid", modid)
     inputs.property("basePackage", baseGroup)
 
-    filesMatching(listOf("mcmod.info", "mixins.raven.json", "**/*.java")) {
+    filesMatching(listOf("mcmod.info", "mixins.raven.json")) {
         filter { line ->
             line.replace("@VERSION@", project.version.toString())
         }

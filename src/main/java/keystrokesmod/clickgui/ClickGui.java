@@ -52,8 +52,8 @@ public class ClickGui extends GuiScreen {
     public int previousScale;
     private static boolean isNotFirstOpen;
 
-    private String clientName = Version.getClientName();
-    private String clientVersion = Version.getVersion();
+    private String clientName;
+    private String clientVersion;
     private String developer = "olzi, hus, key, lquifi, tinywifi";
     private int color = (new Color(57, 146, 229)).getRGB();
 
@@ -65,6 +65,8 @@ public class ClickGui extends GuiScreen {
     private float cached;
 
     public ClickGui() {
+        this.clientName = Version.getClientName();
+        this.clientVersion = Version.getVersion();
         categories = new ArrayList();
         int y = 5;
         Module.category[] values;

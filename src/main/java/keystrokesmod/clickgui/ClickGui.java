@@ -17,8 +17,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +35,8 @@ import java.util.Random;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import keystrokesmod.client.version.Version;
+
 public class ClickGui extends GuiScreen {
     private ScheduledFuture sf;
     private Timer logoSmoothWidth;
@@ -50,8 +52,8 @@ public class ClickGui extends GuiScreen {
     public int previousScale;
     private static boolean isNotFirstOpen;
 
-    private String clientName = "raven bs";
-    private String clientVersion = "plus-plus";
+    private String clientName = Version.getClientName();
+    private String clientVersion = Version.getVersion();
     private String developer = "olzi, hus, key, lquifi, tinywifi";
     private int color = (new Color(57, 146, 229)).getRGB();
 
@@ -127,7 +129,7 @@ public class ClickGui extends GuiScreen {
             this.drawCenteredString(this.fontRendererObj, "v", wd - w_c, h - 5, Utils.getChroma(2L, 900L));
             this.drawCenteredString(this.fontRendererObj, "e", wd - w_c, h + 5, Utils.getChroma(2L, 600L));
             this.drawCenteredString(this.fontRendererObj, "n", wd - w_c, h + 15, Utils.getChroma(2L, 300L));
-            this.drawCenteredString(this.fontRendererObj, "bS+", wd + 1 + w_c, h + 30, Utils.getChroma(2L, 0L));
+            this.drawCenteredString(this.fontRendererObj, "bS++", wd + 1 + w_c, h + 30, Utils.getChroma(2L, 0L));
             this.drawVerticalLine(wd - 10 - w_c, h - 30, h + 43, Color.white.getRGB());
             this.drawVerticalLine(wd + 10 + w_c, h - 30, h + 43, Color.white.getRGB());
             if (this.logoSmoothLength != null) {

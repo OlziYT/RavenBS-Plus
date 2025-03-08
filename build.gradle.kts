@@ -25,6 +25,7 @@ java {
 tasks.withType<JavaCompile> {
     sourceCompatibility = "1.8"
     targetCompatibility = "1.8"
+    options.encoding = "UTF-8"
 }
 
 loom {
@@ -86,34 +87,20 @@ dependencies {
     shadowImpl("org.java-websocket:Java-WebSocket:1.6.0")
 }
 
-tasks.withType(JavaCompile::class) {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType(org.gradle.jvm.tasks.Jar::class) {
-    archiveBaseName.set(modid)
-    manifest.attributes.run {
-        this["FMLCorePluginContainsFMLMod"] = "true"
-        this["ForceLoadAsMod"] = "true"
-
-        this["TweakClass"] = "org.spongepowered.asm.launch.MixinTweaker"
-        this["MixinConfigs"] = "mixins.raven.json"
-    }
-}
-
 tasks.processResources {
     inputs.property("version", project.version)
     inputs.property("mcversion", mcVersion)
     inputs.property("modid", modid)
     inputs.property("basePackage", baseGroup)
 
-    filesMatching(listOf("mcmod.info", "mixins.raven.json")) {
-        expand(inputs.properties)
+    filesMatching(listOf("mcmod.info", "mixins.raven.json", "**/*.java")) {
+        filter { line ->
+            line.replace("@VERSION@", project.version.toString())
+        }
     }
 
     rename("accesstransformer.cfg", "META-INF/${modid}_at.cfg")
 }
-
 
 val remapJar by tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar") {
     archiveClassifier.set("")

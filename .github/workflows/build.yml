@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [ main, master ]
 
-# Définition des permissions nécessaires
+# Define required permissions
 permissions:
   contents: write
   packages: write
@@ -100,19 +100,19 @@ jobs:
         body: |
           ## RavenBS-Plus-Plus v${{ env.VERSION }}
           
-          ### Hash de sécurité
-          **Fichier**: ${{ env.JAR_NAME }}
+          ### Security Hash
+          **File**: ${{ env.JAR_NAME }}
           **SHA256**: ${{ env.HASH }}
           
-          ### Vérification d'intégrité
-          Pour vérifier l'intégrité du fichier sur Windows :
+          ### Integrity Verification
+          To verify file integrity on Windows:
           ```powershell
           Get-FileHash -Path "${{ env.JAR_NAME }}" -Algorithm SHA256
           ```
           
-          Pour vérifier l'intégrité sur Linux/Mac :
+          To verify integrity on Linux/Mac:
           ```bash
           shasum -a 256 "${{ env.JAR_NAME }}"
           ```
           
-          Le hash doit correspondre à celui indiqué ci-dessus.
+          The hash should match the one shown above.

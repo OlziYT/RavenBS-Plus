@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 REM Script pour créer une nouvelle version et la pousser vers GitHub
 
-echo Création d'une nouvelle version de Raven bS+
+echo Création d'une nouvelle version de Raven bS++
 echo ============================================
 
 REM Vérifier si Git est installé

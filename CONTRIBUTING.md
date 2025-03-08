@@ -1,6 +1,6 @@
-# Guide de contribution à Raven bS+
+# Guide de contribution à Raven bS++
 
-Merci de votre intérêt pour contribuer au projet Raven bS+! Ce document fournit des lignes directrices pour contribuer au projet.
+Merci de votre intérêt pour contribuer au projet Raven bS++! Ce document fournit des lignes directrices pour contribuer au projet.
 
 ## Processus de contribution
 
@@ -18,7 +18,7 @@ Nous utilisons le [versionnement sémantique](https://semver.org/) avec le forma
 - **MINOR**: ajout de fonctionnalités rétrocompatibles
 - **PATCH**: corrections de bugs rétrocompatibles
 
-La version actuelle du mod est **1.5.0**.
+La version actuelle du mod est **1.5.3**.
 
 ### Mise à jour de la version
 
@@ -50,8 +50,8 @@ Les fichiers JAR compilés seront disponibles dans le dossier `build/libs/`.
 Les releases sont automatiquement créées lorsqu'un tag avec le format `vX.Y.Z` est poussé vers le dépôt. Par exemple:
 
 ```bash
-git tag v1.5.1
-git push origin v1.5.1
+git tag v1.5.3
+git push origin v1.5.3
 ```
 
 Cela déclenchera le workflow GitHub Actions qui compilera le projet et créera une release avec le fichier JAR.
